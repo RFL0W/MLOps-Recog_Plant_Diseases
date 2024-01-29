@@ -1,0 +1,16 @@
+{
+    "1700236649": {
+        "logtime": "2023-11-17 15:57:29.852719",
+        "username": "julie",
+        "endpoint": "http://npd_tf_api:8088/predict/",
+        "endpoint_params": "None",
+        "response_code": 200,
+        "image_name": "PotatoHealthy2.jpeg",
+        "image_path": null,
+        "prediction": "Potato__healthy",
+        "accuracy": 99.999,
+        "pred_duration": 45.54456543922424,
+        "satis_pred": "Unknown",
+        "satis_pred_duration": "Unknown"
+    }
+}

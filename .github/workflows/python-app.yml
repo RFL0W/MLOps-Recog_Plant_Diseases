@@ -1,0 +1,30 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python application
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    runs-on : ubuntu-latest
+    env:
+      data_Folder: data_test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          pip install -r ./src/containers/npd_core_api/requirements.txt 
+          pip install pytest-asyncio pytest aioresponses httpx pathlib
+      - name: Run tests
+        working-directory: ./src
+        run: |
+          pytest

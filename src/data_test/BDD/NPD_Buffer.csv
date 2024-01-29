@@ -1,0 +1,4 @@
+Categorie,Plante,Maladie,Saine,Set,DirPath,FileName,FilePath,Status
+Apple__healthy,Apple,healthy,1,train,./data_test/Datasets/NPD_Buffer/train/Apple___healthy,Apple__healthy__1698318327.014241.jpg,./data_test/Datasets/NPD_Buffer/train/Apple___healthy/Apple__healthy__1698318327.014241.jpg,0
+Apple__healthy,Apple,healthy,1,train,./data_test/Datasets/NPD_Buffer/train/Apple___healthy,Apple__healthy__1698318973.640831.jpg,./data_test/Datasets/NPD_Buffer/train/Apple___healthy/Apple__healthy__1698318973.640831.jpg,0
+Apple__healthy,Apple,healthy,1,train,./data_test/Datasets/NPD_Buffer/train/Apple___healthy,Apple__healthy__1698943102.039848.jpg,./data_test/Datasets/NPD_Buffer/train/Apple___healthy/Apple__healthy__1698943102.039848.jpg,0

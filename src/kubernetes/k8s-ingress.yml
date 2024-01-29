@@ -1,0 +1,11 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: npd-app-ingress
+  namespace: npd-space
+spec:
+  defaultBackend:
+    service:
+      name: npd-app-service
+      port:
+        number: 8080

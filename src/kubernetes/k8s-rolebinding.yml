@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: edit-configmaps
+  namespace: npd-space
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: npd-space
+roleRef:
+  kind: Role
+  name: configmap-editor
+  apiGroup: rbac.authorization.k8s.io

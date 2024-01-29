@@ -1,0 +1,45 @@
+version: '3.9'
+services:
+  npd_pred_api:
+    image: npd_pred_api:latest
+    environment:
+      - data_Folder=data
+    volumes:
+      - ../data:/my_server/data
+    container_name: npd_pred_api
+    ports:
+      - "8088:8088" 
+    networks:
+      - npd_network
+
+  npd_train_api:
+    image: npd_train_api:latest
+    environment:
+      - data_Folder=data
+    volumes:
+      - ../data:/my_server/data
+    container_name: npd_train_api
+    ports:
+      - "8888:8888" 
+    networks:
+      - npd_network
+
+  npd_core_api:
+    image: npd_core_api:latest
+    environment:
+      - data_Folder=data
+    volumes:
+      - ../data:/my_server/data
+    container_name: npd_core_api
+    ports:
+      - "8080:8080" 
+    networks:
+      - npd_network
+    depends_on:
+      - npd_pred_api
+      - npd_train_api
+
+networks:
+  npd_network:
+    name: npd_network
+

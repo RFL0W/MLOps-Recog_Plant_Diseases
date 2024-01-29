@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: npd-app-deployment
+  namespace: npd-space
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: npd-app
+  template:
+    metadata:
+      labels:
+        app: npd-app
+    spec:
+      containers:
+        - name: npd-pred-api
+          image: rfl0w/npd_pred_api:latest
+          ports:
+            - containerPort: 8088
+          env:
+            - name: data_Folder
+              value: data
+          volumeMounts:
+            - name: data-volume
+              mountPath: /my_server/data
+          livenessProbe:
+            httpGet:
+              path: /apichk
+              port: 8088
+            initialDelaySeconds: 20
+            periodSeconds: 300
+          readinessProbe:
+            httpGet:
+              path: /apichk
+              port: 8088
+            initialDelaySeconds: 15
+            periodSeconds: 120
+
+        - name: npd-train-api
+          image: rfl0w/npd_train_api:latest
+          ports:
+            - containerPort: 8888
+          env:
+            - name: data_Folder
+              value: data
+          volumeMounts:
+            - name: data-volume
+              mountPath: /my_server/data
+          readinessProbe:
+            httpGet:
+              path: /apichk
+              port: 8888
+            initialDelaySeconds: 15
+            periodSeconds: 120
+
+        - name: npd-core-api
+          image: rfl0w/npd_core_api:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TF_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tf-adminpass
+                  key: password
+            - name: data_Folder
+              value: data
+          volumeMounts:
+            - name: data-volume
+              mountPath: /my_server/data
+          livenessProbe:
+            httpGet:
+              path: /apichk
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 120
+          readinessProbe:
+            httpGet:
+              path: /apichk
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 30
+
+      volumes:
+      - name: data-volume
+        hostPath:
+          path: /home/NPD-Admin/aug23_cmlops_plantes/src/data
